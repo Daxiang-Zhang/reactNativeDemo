@@ -8,7 +8,6 @@ import React, {Component} from 'react';
 import {
   Platform,
   Image,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -18,6 +17,7 @@ import {
 import Util from './utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const weatherData = [
   {
@@ -557,6 +557,7 @@ class Weather extends Component {
     super(props);
     this.state = {
       weather: weatherData,
+      swiperScrollFlag: true,
     };
   }
 
@@ -568,6 +569,13 @@ class Weather extends Component {
 
   _back() {
     this.props.back();
+  }
+
+  setSwiperScrollFlag(flag) {
+    this.setState({
+      swiperScrollFlag: flag,
+    });
+    console.log(flag, this.state.swiperScrollFlag);
   }
 
   render() {
@@ -731,7 +739,10 @@ class Weather extends Component {
       <View style={styles.weatherContainer}>
         <Swiper
           style={styles.wrapper}
+          loop={false}
           showsButtons={false}
+          removeClippedSubviews={false}
+          scrollEnabled={this.state.swiperScrollFlag}
           paginationStyle={{
             bottom: 10,
             paddingTop: 10,
@@ -793,6 +804,7 @@ const styles = StyleSheet.create({
     height: Util.size.height,
   },
   pageContainer: {
+    flex: 1,
     backgroundColor: 'transparent',
     position: 'absolute',
     width: Util.size.width,

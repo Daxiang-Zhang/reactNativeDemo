@@ -13,9 +13,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import Home from './Home';
-import Day1 from './view/day1';
-import Day2 from './view/day2';
-import Util from './view/utils';
+import Day1 from './30-days-view/day1';
+import Day2 from './30-days-view/day2';
+import Util from './30-days-view/utils';
 const days = [
   {
     key: 0,

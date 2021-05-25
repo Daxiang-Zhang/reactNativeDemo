@@ -3,3 +3,10 @@
 
 # 从模仿该项目开始.
 https://github.com/fangwei716/30-days-of-react-native
+
+## Project setup
+```
+npm install
+
+npm run android || npm run ios
+```
