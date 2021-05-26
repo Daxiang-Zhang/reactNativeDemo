@@ -15,6 +15,7 @@ import IconFA from 'react-native-vector-icons/FontAwesome';
 import Home from './Home';
 import Day1 from './30-days-view/day1';
 import Day2 from './30-days-view/day2';
+import Day3 from './30-days-view/day3';
 import Util from './30-days-view/utils';
 const days = [
   {
@@ -38,6 +39,17 @@ const days = [
     size: 60,
     color: '#90bdc1',
     hideNav: true,
+  },
+  {
+    key: 3,
+    name: 'Day3',
+    title: 'cocoapods',
+    component: Day3,
+    isFA: true,
+    icon: 'contao',
+    size: 50,
+    color: '#FF9A05',
+    hideNav: false,
   },
 ];
 function IndexScreen({navigation}) {
@@ -70,7 +82,7 @@ function IndexScreen({navigation}) {
       </TouchableHighlight>
     );
   });
-  return <View style={{flex: 1}}>{boxs}</View>;
+  return <View style={styles.container}>{boxs}</View>;
 }
 function DetailsScreen() {
   return (
@@ -98,6 +110,11 @@ function MainStackScreen() {
         component={Day2}
         options={{headerShown: false}}
       />
+      <MainStack.Screen
+        name="Day3"
+        component={Day3}
+        options={{headerShown: false}}
+      />
       <MainStack.Screen name="Video" component={Home} />
       <MainStack.Screen name="Details" component={DetailsScreen} />
     </MainStack.Navigator>
@@ -116,6 +133,9 @@ const SimpleApp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: Util.size.width,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   mainView: {
     marginTop: 55,
