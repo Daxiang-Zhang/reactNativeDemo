@@ -16,6 +16,8 @@ import Home from './Home';
 import Day1 from './30-days-view/day1';
 import Day2 from './30-days-view/day2';
 import Day3 from './30-days-view/day3';
+import Day5 from './30-days-view/day5';
+import Day7 from './30-days-view/day7';
 import Util from './30-days-view/utils';
 const days = [
   {
@@ -41,15 +43,37 @@ const days = [
     hideNav: true,
   },
   {
-    key: 3,
+    key: 2,
     name: 'Day3',
-    title: 'cocoapods',
+    title: 'twitter',
     component: Day3,
     isFA: true,
-    icon: 'contao',
+    icon: 'twitter',
     size: 50,
     color: '#FF9A05',
     hideNav: false,
+  },
+  {
+    key: 3,
+    name: 'Day5',
+    title: 'find my location',
+    component: Day5,
+    isFA: false,
+    icon: 'md-pin',
+    size: 50,
+    color: '#00D204',
+    hideNav: false,
+  },
+  {
+    key: 6,
+    name: 'Day7',
+    title: 'Moveable Circle',
+    component: Day7,
+    isFA: false,
+    icon: 'ios-baseball',
+    size: 50,
+    color: '#5e2a06',
+    hideNav: true,
   },
 ];
 function IndexScreen({navigation}) {
@@ -113,6 +137,12 @@ function MainStackScreen() {
       <MainStack.Screen
         name="Day3"
         component={Day3}
+        options={{headerShown: false}}
+      />
+      <MainStack.Screen name="Day5" component={Day5} />
+      <MainStack.Screen
+        name="Day7"
+        component={Day7}
         options={{headerShown: false}}
       />
       <MainStack.Screen name="Video" component={Home} />

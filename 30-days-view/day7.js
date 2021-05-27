@@ -2,27 +2,34 @@
  * Day 7
  * Basic pan gesture
  */
-'use strict';
-
-import React,{ Component } from 'react';
-import { Platform,Image,StyleSheet,StatusBar,Text,TouchableHighlight,PanResponder,View } from 'react-native';
+import React, {Component} from 'react';
+import {
+  Platform,
+  Image,
+  StyleSheet,
+  StatusBar,
+  Text,
+  TouchableHighlight,
+  PanResponder,
+  View,
+} from 'react-native';
 import Util from './utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class MoveableCircle extends Component{
+class MoveableCircle extends Component {
   constructor() {
     super();
     this.state = {
-      color: "rgba(255,255,255,0.7)",
+      color: 'rgba(255,255,255,0.7)',
     };
   }
 
-  _previousLeft = Util.size.width/2-40;
-  _previousTop = Util.size.height/2-50;
-  _maxTop = Util.size.height-110;
-  _maxLeft = Util.size.width-98;
+  _previousLeft = Util.size.width / 2 - 40;
+  _previousTop = Util.size.height / 2 - 50;
+  _maxTop = Util.size.height - 110;
+  _maxLeft = Util.size.width - 98;
   _circleStyles = {};
-  circle = (null : ?{ setNativeProps(props: Object): void });
+  circle = (null: ?{setNativeProps(props: Object): void});
 
   _updatePosition() {
     this.circle && this.circle.setNativeProps(this._circleStyles);
@@ -32,41 +39,43 @@ class MoveableCircle extends Component{
     this._previousLeft += gestureState.dx;
     this._previousTop += gestureState.dy;
     this.setState({
-      color: "rgba(255,255,255,0.7)"
+      color: 'rgba(255,255,255,0.7)',
     });
   }
 
   componentWillMount() {
     this._panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-        onMoveShouldSetPanResponder: (evt, gestureState) => true,
-        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-        onPanResponderGrant: (evt, gestureState) => {
-          this.setState({
-            color: "white",
-          })
-        },
-        onPanResponderMove: (evt, gestureState) => {
-           this._circleStyles.style.left = this._previousLeft + gestureState.dx;
-           this._circleStyles.style.top = this._previousTop + gestureState.dy;
-           if (this._circleStyles.style.left<0) {
-              this._circleStyles.style.left = 0;
-           };
-           if (this._circleStyles.style.top<5) {
-              this._circleStyles.style.top = 5;
-           };
-           if (this._circleStyles.style.left>this._maxLeft) {
-              this._circleStyles.style.left = this._maxLeft;
-           };
-           if (this._circleStyles.style.top>this._maxTop) {
-              this._circleStyles.style.top = this._maxTop;
-           };
-           this._updatePosition();
-        },
-        onPanResponderTerminationRequest: (evt, gestureState) => true,
-        onPanResponderRelease: (evt, gestureState) => this._endMove(evt, gestureState),
-        onPanResponderTerminate: (evt, gestureState) => this._endMove(evt, gestureState),
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderGrant: (evt, gestureState) => {
+        this.setState({
+          color: 'white',
+        });
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        this._circleStyles.style.left = this._previousLeft + gestureState.dx;
+        this._circleStyles.style.top = this._previousTop + gestureState.dy;
+        if (this._circleStyles.style.left < 0) {
+          this._circleStyles.style.left = 0;
+        }
+        if (this._circleStyles.style.top < 5) {
+          this._circleStyles.style.top = 5;
+        }
+        if (this._circleStyles.style.left > this._maxLeft) {
+          this._circleStyles.style.left = this._maxLeft;
+        }
+        if (this._circleStyles.style.top > this._maxTop) {
+          this._circleStyles.style.top = this._maxTop;
+        }
+        this._updatePosition();
+      },
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderRelease: (evt, gestureState) =>
+        this._endMove(evt, gestureState),
+      onPanResponderTerminate: (evt, gestureState) =>
+        this._endMove(evt, gestureState),
     });
 
     this._circleStyles = {
@@ -75,7 +84,6 @@ class MoveableCircle extends Component{
         top: this._previousTop,
       },
     };
-
   }
 
   componentDidMount() {
@@ -83,51 +91,61 @@ class MoveableCircle extends Component{
   }
 
   render() {
-    return(
-      <View ref={(circle) => {this.circle = circle;}} style={styles.MoveableCircle} {...this._panResponder.panHandlers}>
-        <Icon ref="baseball" name="ios-baseball" color={this.state.color} size={120}></Icon>
+    return (
+      <View
+        ref={circle => {
+          this.circle = circle;
+        }}
+        style={styles.MoveableCircle}
+        {...this._panResponder.panHandlers}>
+        <Icon
+          ref="baseball"
+          name="ios-baseball"
+          color={this.state.color}
+          size={120}
+        />
       </View>
-    )
+    );
   }
 }
 
-export default class extends Component{
+export default class extends Component {
   componentWillMount() {
-    if(Platform.OS === "ios"){
+    if (Platform.OS === 'ios') {
       StatusBar.setBarStyle(1);
     }
   }
 
   render() {
-    return(
+    return (
       <View style={styles.container}>
-        <Image source={require('./img/agrass.png')} style={styles.bg}></Image>
+        <Image source={require('./img/agrass.png')} style={styles.bg} />
         <View style={styles.circleContainer}>
-          <MoveableCircle></MoveableCircle>
+          <MoveableCircle />
         </View>
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    height:Util.size.height,
-    width: Util.size.width
-  },
-  bg:{
-    width: Util.size.width,
-    resizeMode:"stretch",
-    position:"absolute"
-  },
-  circleContainer:{
-    height:Util.size.height,
+  container: {
+    height: Util.size.height,
     width: Util.size.width,
   },
-  MoveableCircle:{
-    backgroundColor:"transparent",
-    position:"absolute",
-    left:0,
-    right:0
+  bg: {
+    width: Util.size.width,
+    resizeMode: 'stretch',
+    position: 'absolute',
+  },
+  circleContainer: {
+    height: Util.size.height,
+    width: Util.size.width,
+  },
+  MoveableCircle: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    left: 0,
+    right: 0,
   },
 });
